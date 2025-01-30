@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_uitreeni/data/db_helper.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
     }
     return MaterialApp(
       title: appTitle,
-      initialRoute: '/todolist',
+      initialRoute: FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/todolist',
       routes: {
         '/main' : (context) => MainView(),
         '/todolist' : (context) => TodoListView(),
