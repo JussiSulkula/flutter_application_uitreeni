@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_uitreeni/data/db_helper.dart';
 import 'package:flutter_application_uitreeni/data/todo_list_manager.dart';
+import 'package:flutter_application_uitreeni/firebase_options.dart';
 import 'package:flutter_application_uitreeni/views/mainview.dart';
 import 'package:flutter_application_uitreeni/views/todo_list_view.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,9 @@ Future<void> main() async {
 WidgetsFlutterBinding.ensureInitialized();
 
 await DatabaseHelper.instance.init();
+
+await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
 runApp(ChangeNotifierProvider(
   create: (context){
     var model = TodoListManager();

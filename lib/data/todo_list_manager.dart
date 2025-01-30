@@ -23,7 +23,7 @@ class TodoListManager extends ChangeNotifier {
     item.id = _items.last.id + 1;
     }
    _items.add(item);
-   dbHelper.insert(item);
+  dbHelper.insert(item);
    notifyListeners();
   
   }
@@ -59,7 +59,7 @@ class TodoListManager extends ChangeNotifier {
   Future<void> loadFromDB() async {
     final list = await dbHelper.queryAllRows();
     for(TodoItem item in list) {
-      _items.add(item);
+     _items.add(item);
     }
     notifyListeners();
   }
