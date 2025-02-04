@@ -31,8 +31,15 @@ class TodoListView extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, '/input');
                 },
-              )
-            ],
+              ),
+            IconButton(
+              icon: Icon(Icons.account_circle),
+              tooltip: 'Profiili',
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+          ],
           ),
           body: ListView.builder(
             itemCount: listManager.items.length,

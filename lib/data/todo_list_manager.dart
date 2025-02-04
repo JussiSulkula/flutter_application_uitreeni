@@ -3,14 +3,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_uitreeni/data/db_helper.dart';
+import 'package:flutter_application_uitreeni/data/firebase_helper.dart';
 import 'package:flutter_application_uitreeni/data/todo_item.dart';
 
 class TodoListManager extends ChangeNotifier {
   final List<TodoItem> _items = [];
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
+  final fbHelper = FirebaseHelper();
 
   Future<void> init() async {
-    loadFromDB();
+    loadFromFirebase();
   }
 
   UnmodifiableListView<TodoItem> get items => 
@@ -24,6 +26,7 @@ class TodoListManager extends ChangeNotifier {
     }
    _items.add(item);
   dbHelper.insert(item);
+  fbHelper.saveTodoItem(item);
    notifyListeners();
   
   }
@@ -60,6 +63,14 @@ class TodoListManager extends ChangeNotifier {
     final list = await dbHelper.queryAllRows();
     for(TodoItem item in list) {
      _items.add(item);
+    }
+    notifyListeners();
+  }
+  void loadFromFirebase() async {
+    final list = await fbHelper.getData();
+    
+    for(TodoItem item in list) {
+      _items.add(item);
     }
     notifyListeners();
   }

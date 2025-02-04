@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'flutter-ui-testi.firebaseapp.com',
     storageBucket: 'flutter-ui-testi.firebasestorage.app',
   );
+
 }
